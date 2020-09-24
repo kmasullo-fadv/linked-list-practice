@@ -71,7 +71,7 @@ class LinkedList {
     }
 
     insertAfter(item, before) {
-
+        
     }
 }
 
