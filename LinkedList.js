@@ -61,17 +61,45 @@ class LinkedList {
     }
 
     insertBefore(value, nextValue) {
-        let tempNode = this.head;
-        let next = this.find(nextValue)
-        while (tempNode.next !== next && tempNode !== next) {
-            tempNode = tempNode.next;
+        let node = this.head;
+        let next = this.find(nextValue);
+        if (node === next) {
+            next = node;
+            this.head = new _Node(value, next)
+        } else {
+            while (node.next.value !== nextValue && node.value !== nextValue) {
+                node = node.next;
+            }
+            const item = new _Node(value, next)
+            node.next = item;
         }
-        const item = new _Node(value, next)
-        tempNode.next = item;
     }
 
-    insertAfter(item, before) {
-        
+    insertAfter(value, beforeValue) {
+        let node = this.head;
+        let before = this.find(beforeValue);
+        while(node !== before) {
+            node = node.next;
+        }
+        if (!node.next) {
+            this.insertLast(value);
+        } else {
+            const item = new _Node(value, node.next);
+            before.next = item;
+        }
+    }
+
+    insertAt(value, position) {
+        let node = this.head;
+        if(position === 1) {
+            this.insertBefore(value, node.value)
+        } else {
+            for(let i=2; i<position; i++) {
+                node = node.next;
+            }
+            const item = new _Node(value, node.next)
+            node.next = item;
+        }
     }
 }
 
